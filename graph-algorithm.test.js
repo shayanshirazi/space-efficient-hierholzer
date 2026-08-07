@@ -98,6 +98,14 @@ test("the default example produces multiple batches", () => {
   assert.equal(graphAnalysis.batches.length, 2);
 });
 
+test("the large preset exercises a dense multigraph across three batches", () => {
+  const graphAnalysis = analyzeGraph(GRAPH_PRESETS["large-multigraph"].edges);
+
+  assert.equal(graphAnalysis.graph.nodes.length, 12);
+  assert.equal(graphAnalysis.graph.edges.length, 56);
+  assert.equal(graphAnalysis.batches.length, 3);
+});
+
 test("the memory scale includes the combined carry and fresh batch", () => {
   const graphAnalysis = analyzeGraph(MEMORY_SCALE_REGRESSION_GRAPH);
   const secondBatch = graphAnalysis.batches[1];

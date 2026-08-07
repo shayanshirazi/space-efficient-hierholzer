@@ -25,6 +25,61 @@ export const GRAPH_PRESETS = Object.freeze({
 5 5
 6 6`,
   },
+  "large-multigraph": {
+    name: "Large multigraph",
+    edges: `# outer cycle with parallel bundles
+1 2 3
+2 3
+3 4
+4 5 3
+5 6
+6 7
+7 8 3
+8 9
+9 10
+10 11 3
+11 12
+12 1
+# odd and even chord cycles
+1 3
+3 5
+5 7
+7 9
+9 11
+11 1
+2 4
+4 6
+6 8
+8 10
+10 12
+12 2
+# interleaving cycle
+1 7
+7 2
+2 8
+8 3
+3 9
+9 4
+4 10
+10 5
+5 11
+11 6
+6 12
+12 1
+# one loop at each vertex
+1 1
+2 2
+3 3
+4 4
+5 5
+6 6
+7 7
+8 8
+9 9
+10 10
+11 11
+12 12`,
+  },
   paper: {
     name: "Paper multigraph",
     edges: `# u v copies
