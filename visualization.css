@@ -811,14 +811,6 @@ input[type="range"]:focus-visible {
   --memory-color: var(--ink-soft);
 }
 
-.memory-row.memory-carry .memory-fill {
-  background: repeating-linear-gradient(
-    90deg,
-    var(--ink-soft) 0 6px,
-    transparent 6px 9px
-  );
-}
-
 .memory-count {
   color: var(--ink-soft);
   font-family: var(--mono);
