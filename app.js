@@ -499,6 +499,34 @@ function outputSegmentClass(segment) {
     : batchEdgeClass(segment.batchIndex);
 }
 
+function renderOutputTourPath(graphAnalysis, outputEdgeCursor) {
+  const visibleVertices = graphAnalysis.outputTour.vertices.slice(0, outputEdgeCursor + 1);
+  const visibleSegments = graphAnalysis.outputTour.segments.slice(0, outputEdgeCursor);
+  const tourPath = document.createDocumentFragment();
+
+  visibleVertices.forEach((vertex, vertexIndex) => {
+    const vertexMarker = document.createElement("span");
+    vertexMarker.className = "tour-vertex";
+    vertexMarker.textContent = `v${vertex}`;
+    if (vertexIndex === visibleVertices.length - 1) {
+      vertexMarker.classList.add("is-current");
+      vertexMarker.setAttribute("aria-current", "step");
+    }
+    tourPath.append(vertexMarker);
+
+    const outgoingSegment = visibleSegments[vertexIndex];
+    if (outgoingSegment === undefined) return;
+    const edgeConnector = document.createElement("span");
+    edgeConnector.className = `tour-edge ${outputSegmentClass(outgoingSegment)}`;
+    edgeConnector.title = outgoingSegment.label;
+    edgeConnector.setAttribute("aria-hidden", "true");
+    tourPath.append(edgeConnector);
+  });
+
+  dom.outputTourSequence.replaceChildren(tourPath);
+  dom.outputTourSequence.scrollLeft = dom.outputTourSequence.scrollWidth;
+}
+
 function appendGraphNode(layer, { node, position, className = "" }) {
   const group = createSvgElement("g", {
     class: `graph-node ${className}`.trim(),
@@ -599,10 +627,7 @@ function renderOutputGraph({ nodePositionsByVertex, edgePathsById, outputEdgeCur
   dom.outputDescription.textContent = outputEdgeCursor > 0
     ? `The output graph contains the first ${outputEdgeCursor} edges of the Eulerian tour and currently ends at v${currentVertex}.`
     : `The output graph has the same vertices as the input and no edges yet. The tour starts at v${currentVertex}.`;
-  dom.outputTourSequence.textContent = graphAnalysis.outputTour.vertices
-    .slice(0, outputEdgeCursor + 1)
-    .map((vertex) => `v${vertex}`)
-    .join(" → ");
+  renderOutputTourPath(graphAnalysis, outputEdgeCursor);
 }
 
 function renderGraph(stage) {

@@ -393,13 +393,75 @@ input[type="range"]:focus-visible {
 }
 
 #output-tour-sequence {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 2px 3px 6px;
   overflow-x: auto;
   color: var(--ink-soft);
-  font-family: var(--mono);
-  font-size: 9px;
-  line-height: 1.4;
   scrollbar-width: thin;
   white-space: nowrap;
+}
+
+.tour-vertex {
+  display: inline-grid;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid #b8c7ca;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink-soft);
+  font-family: var(--display);
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 600;
+  transition: background 220ms ease, border-color 220ms ease, color 220ms ease;
+}
+
+.tour-vertex.is-current {
+  border-color: var(--blue-deep);
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(8, 120, 255, 0.12);
+}
+
+.tour-edge {
+  --tour-edge-color: #b8c7ca;
+  position: relative;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 2px;
+  background: var(--tour-edge-color);
+}
+
+.tour-edge::after {
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid var(--tour-edge-color);
+  border-right: 2px solid var(--tour-edge-color);
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.tour-edge.is-skeleton {
+  --tour-edge-color: var(--blue);
+}
+
+.tour-edge.is-batch-orange {
+  --tour-edge-color: var(--orange);
+}
+
+.tour-edge.is-batch-green {
+  --tour-edge-color: var(--green);
+}
+
+.tour-edge.is-batch-purple {
+  --tour-edge-color: var(--purple);
 }
 
 .graph-edge {
