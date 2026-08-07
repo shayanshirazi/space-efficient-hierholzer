@@ -1,4 +1,4 @@
-export const DEFAULT_PRESET_ID = "looped-hexagon";
+export const DEFAULT_PRESET_ID = "large-multigraph";
 
 export const GRAPH_PRESETS = Object.freeze({
   "looped-hexagon": {

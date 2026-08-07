@@ -915,15 +915,13 @@ input[type="range"]:focus-visible {
   color: var(--ink-soft);
 }
 
-.transport-button svg,
-.reset-icon svg {
+.transport-button svg {
   width: 16px;
   height: 16px;
   overflow: visible;
 }
 
-.transport-button path,
-.reset-icon path {
+.transport-button path {
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -985,18 +983,6 @@ input[type="range"]:focus-visible {
 
 .play-button.is-playing .icon-pause {
   display: block;
-}
-
-.playback .reset-icon {
-  display: grid;
-  width: 26px;
-  min-width: 26px;
-  height: 26px;
-  padding: 0;
-  place-items: center;
-  border-color: transparent;
-  color: var(--muted);
-  background: transparent;
 }
 
 .playback .speed-button {

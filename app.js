@@ -43,7 +43,6 @@ const dom = {
   playSteps: document.querySelector("#play-steps"),
   speedButton: document.querySelector("#speed-button"),
   speedValue: document.querySelector("#speed-value"),
-  resetSteps: document.querySelector("#reset-steps"),
   canvasTitle: document.querySelector("#canvas-title"),
   graphStage: document.querySelector("#graph-stage"),
   edgeLayer: document.querySelector("#edge-layer"),
@@ -1167,7 +1166,6 @@ dom.firstStep.addEventListener("click", () => setTimelineStage(0));
 dom.lastStep.addEventListener("click", () => {
   setTimelineStage(state.timelineStages.length - 1, { atEnd: true });
 });
-dom.resetSteps.addEventListener("click", () => setTimelineStage(0));
 dom.playSteps.addEventListener("click", startPlayback);
 dom.speedButton.addEventListener("click", advancePlaybackSpeed);
 dom.stepSlider.addEventListener("input", (event) => {
