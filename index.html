@@ -3,10 +3,276 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Space-Efficient Hierholzer</title>
+    <meta
+      name="description"
+      content="An interactive visual companion to Space-Efficient Hierholzer for Undirected Graphs."
+    >
+    <title>Hierholzer</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="visualization.css?v=20260806-2200">
+    <link rel="stylesheet" href="styles.css?v=20260806-2200">
   </head>
   <body>
-    <h1>Space-Efficient Hierholzer</h1>
-    <p>Website coming soon.</p>
+    <a class="skip-link" href="#visual-lab">Skip to the visual lab</a>
+
+    <header class="site-header">
+      <div class="paper-identity">
+        <h1>Space-Efficient Hierholzer for Undirected Graphs</h1>
+        <div class="paper-byline">
+          <div class="author-strip" aria-label="Authors">
+            <span>Elena Grigorescu</span>
+            <span>Ziad Ismaili Alaoui</span>
+            <span>Tamio-Vesa Nakajima</span>
+            <span>Shayan Shirazi Mofrad</span>
+            <span>Sebastian Wild</span>
+          </div>
+          <div class="paper-links">
+            <a class="paper-meta-link" href="#">
+              arXiv
+              <svg class="external-link-icon" viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M4.5 2.2H2.9a1.4 1.4 0 0 0-1.4 1.4v5.5a1.4 1.4 0 0 0 1.4 1.4h5.5a1.4 1.4 0 0 0 1.4-1.4V7.5M6.8 1.5h3.7v3.7M10.3 1.7 5.6 6.4"></path>
+              </svg>
+            </a>
+            <a
+              class="paper-meta-link"
+              href="https://github.com/shayanshirazi/space-efficient-hierholzer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Code
+              <svg class="external-link-icon" viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M4.5 2.2H2.9a1.4 1.4 0 0 0-1.4 1.4v5.5a1.4 1.4 0 0 0 1.4 1.4h5.5a1.4 1.4 0 0 0 1.4-1.4V7.5M6.8 1.5h3.7v3.7M10.3 1.7 5.6 6.4"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="visual-section" id="visual-lab">
+        <div
+          class="lab"
+          role="region"
+          aria-label="Eulerian tour visualization"
+          tabindex="0"
+        >
+          <div class="lab-grid">
+            <aside class="stage-rail" aria-label="Algorithm stages">
+              <div class="rail-heading">
+                <span>Steps</span>
+              </div>
+              <ol id="stage-list"></ol>
+            </aside>
+
+            <div class="canvas-column">
+              <div class="canvas-card">
+                <div class="canvas-meta">
+                  <strong id="canvas-title">The graph G</strong>
+                  <span class="sr-only" id="visualization-status" aria-live="polite" aria-atomic="true"></span>
+                  <div class="playback header-playback">
+                    <div class="transport-controls" aria-label="Visualization controls">
+                      <button class="transport-button" id="first-step" type="button" aria-label="First step" title="First step">
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M4 3.5v9M12 4.5 7 8l5 3.5"></path>
+                        </svg>
+                      </button>
+                      <button class="transport-button" id="previous-step" type="button" aria-label="Previous step" title="Previous step">
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M10.5 4.5 6 8l4.5 3.5"></path>
+                        </svg>
+                      </button>
+                      <button class="play-button" id="play-steps" type="button" aria-label="Play visualization" title="Play">
+                        <span class="play-icon" aria-hidden="true">
+                          <svg class="icon-play" viewBox="0 0 16 16">
+                            <path d="M5.1 2.7a1 1 0 0 0-1.55.84v8.92a1 1 0 0 0 1.55.84l6.75-4.46a1 1 0 0 0 0-1.68Z"></path>
+                          </svg>
+                          <svg class="icon-pause" viewBox="0 0 16 16">
+                            <rect x="3.75" y="3" width="3.25" height="10" rx="1.2"></rect>
+                            <rect x="9" y="3" width="3.25" height="10" rx="1.2"></rect>
+                          </svg>
+                        </span>
+                      </button>
+                      <button class="transport-button" id="next-step" type="button" aria-label="Next step" title="Next step">
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="m5.5 4.5 4.5 3.5-4.5 3.5"></path>
+                        </svg>
+                      </button>
+                      <button class="transport-button" id="last-step" type="button" aria-label="Last step" title="Last step">
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="m4 4.5 5 3.5-5 3.5M12 3.5v9"></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <span class="toolbar-separator" aria-hidden="true"></span>
+                    <div class="playback-progress">
+                      <span class="step-readout">
+                        <span>Step</span>
+                        <strong id="playback-step-count">1 / 1</strong>
+                      </span>
+                      <input
+                        id="step-slider"
+                        type="range"
+                        min="0"
+                        max="4"
+                        value="0"
+                        aria-label="Visualization step"
+                      >
+                      <button class="reset-icon" id="reset-steps" type="button" aria-label="Reset visualization" title="Reset">
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M4.2 5.1H1.8V2.7M2.1 5a6 6 0 1 1-.1 5.8"></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <span class="toolbar-separator" aria-hidden="true"></span>
+                    <button
+                      class="speed-button"
+                      id="speed-button"
+                      type="button"
+                      aria-label="Playback speed 1×; click for 1.5×"
+                      title="Speed 1× · click for 1.5×"
+                    >
+                      <svg class="speed-gauge" viewBox="0 0 24 16" aria-hidden="true">
+                        <path d="M3 13a9 9 0 0 1 18 0"></path>
+                        <line class="speed-needle" x1="12" y1="13" x2="12" y2="6"></line>
+                        <circle cx="12" cy="13" r="1.4"></circle>
+                      </svg>
+                      <span id="speed-value">1×</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="graph-canvas-wrap" id="graph-stage">
+                  <div class="dual-graph-layout">
+                    <div class="graph-pane working-pane">
+                      <div class="pane-label">
+                        <span>Working graph</span>
+                      </div>
+                      <svg
+                        id="graph-canvas"
+                        class="graph-canvas"
+                        viewBox="0 0 820 520"
+                        role="img"
+                        aria-labelledby="graph-visual-title graph-visual-description"
+                      >
+                        <title id="graph-visual-title">Algorithm graph visualization</title>
+                        <desc id="graph-visual-description">
+                          An interactive undirected multigraph showing the current phase of the algorithm.
+                        </desc>
+                        <g id="edge-layer"></g>
+                        <g id="node-layer"></g>
+                      </svg>
+                    </div>
+
+                    <div class="transfer-lane" aria-hidden="true">
+                      <span class="transfer-arrow">→</span>
+                    </div>
+
+                    <div class="graph-pane output-pane">
+                      <div class="pane-label">
+                        <span>Output graph</span>
+                      </div>
+                      <svg
+                        id="output-canvas"
+                        class="graph-canvas output-canvas"
+                        viewBox="0 0 820 520"
+                        role="img"
+                        aria-labelledby="output-visual-title output-visual-description"
+                      >
+                        <title id="output-visual-title">Eulerian tour written so far</title>
+                        <desc id="output-visual-description">
+                          The same vertex set with each edge added as it is written to output.
+                        </desc>
+                        <g id="output-edge-layer"></g>
+                        <g id="output-node-layer"></g>
+                      </svg>
+                    </div>
+
+                    <div class="output-tour-strip">
+                      <span>Tour</span>
+                      <div id="output-tour-sequence" aria-label="Eulerian tour written so far"></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <aside class="control-panel">
+              <div class="panel-top">
+                <div class="graph-actions">
+                  <label class="preset-control">
+                    <span>Graph</span>
+                    <select id="preset-select" aria-label="Choose a graph"></select>
+                  </label>
+                </div>
+
+                <div class="panel-explanation">
+                  <p class="panel-copy" id="detail-copy"></p>
+                </div>
+
+                <section class="memory-view" aria-labelledby="memory-title">
+                  <div class="memory-heading">
+                    <div class="memory-title-row">
+                      <span id="memory-title">Working memory</span>
+                      <strong><i>O</i>(<i>n</i>) words</strong>
+                    </div>
+                  </div>
+                  <div class="memory-rows" id="memory-rows"></div>
+                </section>
+              </div>
+
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="graph-dialog" aria-labelledby="graph-dialog-title">
+      <form method="dialog" id="graph-form">
+        <div class="dialog-heading">
+          <h2 id="graph-dialog-title">Custom graph</h2>
+          <button class="dialog-close" id="close-editor" type="button" aria-label="Close graph editor">×</button>
+        </div>
+
+        <div class="dialog-intro">
+          <p class="dialog-help" id="graph-dialog-help">
+            Write one edge per line. Use <code>1 2 3</code> for three parallel copies, or <code>1 1</code> for a loop.
+          </p>
+          <a
+            class="graph-editor-link"
+            href="https://csacademy.com/app/graph_editor/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>Use visual editor</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="editor-heading">
+          <label class="edge-editor-label" for="edge-editor">Edges</label>
+        </div>
+        <textarea
+          id="edge-editor"
+          spellcheck="false"
+          rows="10"
+          aria-describedby="graph-dialog-help graph-editor-constraint"
+          aria-errormessage="editor-error"
+        ></textarea>
+
+        <div class="editor-footer">
+          <span id="graph-editor-constraint">The graph must be connected, with even degree at every vertex.</span>
+          <p class="editor-error" id="editor-error" role="alert"></p>
+        </div>
+
+        <div class="dialog-actions">
+          <button class="quiet-button" value="cancel" type="button" id="cancel-editor">Cancel</button>
+          <button class="primary-button" value="default" type="submit">Use graph</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="app.js?v=20260806-2200"></script>
   </body>
 </html>
