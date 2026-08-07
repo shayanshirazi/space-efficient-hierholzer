@@ -21,6 +21,7 @@ const MINIMUM_OUTPUT_FRAME_DELAY_MS = 260;
 const MAXIMUM_OUTPUT_FRAME_DELAY_MS = 560;
 const TARGET_OUTPUT_PLAYBACK_DURATION_MS = 8200;
 const ALGORITHM_STAGE_DELAY_MS = 1800;
+const CIRCUIT_TO_SKELETON_PAUSE_MS = 700;
 
 const dom = {
   lab: document.querySelector(".lab"),
@@ -973,21 +974,36 @@ function nextFrame() {
   setTimelineStage(state.currentStageIndex + 1);
 }
 
+function isAtCircuitToSkeletonBoundary(stage) {
+  if (stage.kind !== "output-stream") return false;
+  const { end } = outputRangeForStage(stage);
+  if (state.outputEdgeCursor === 0 || state.outputEdgeCursor >= end) return false;
+
+  const previousSegment = state.graphAnalysis.outputTour.segments[state.outputEdgeCursor - 1];
+  const nextSegment = state.graphAnalysis.outputTour.segments[state.outputEdgeCursor];
+  return previousSegment?.type === "circuit"
+    && nextSegment?.type === "skeleton"
+    && previousSegment.rank === nextSegment.rank;
+}
+
 function playbackDelay() {
   const stage = state.timelineStages[state.currentStageIndex];
-  let delay;
+  let baseDelay;
   if (stage.kind === "output-stream") {
     const delayForTargetDuration = Math.round(
       TARGET_OUTPUT_PLAYBACK_DURATION_MS / state.graphAnalysis.graph.edges.length,
     );
-    delay = Math.max(
+    baseDelay = Math.max(
       MINIMUM_OUTPUT_FRAME_DELAY_MS,
       Math.min(MAXIMUM_OUTPUT_FRAME_DELAY_MS, delayForTargetDuration),
     );
   } else {
-    delay = ALGORITHM_STAGE_DELAY_MS;
+    baseDelay = ALGORITHM_STAGE_DELAY_MS;
   }
-  return Math.round(delay / state.playbackRate);
+  const boundaryPause = isAtCircuitToSkeletonBoundary(stage)
+    ? CIRCUIT_TO_SKELETON_PAUSE_MS
+    : 0;
+  return Math.round((baseDelay + boundaryPause) / state.playbackRate);
 }
 
 function formatPlaybackRate(rate) {
