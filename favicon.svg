@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Graph node</title>
+  <rect width="32" height="32" rx="8" fill="#f7fbfb"/>
+  <g fill="none" stroke="#70878c" stroke-linecap="round" stroke-width="2">
+    <path d="M15 15 7 8M17 14l8-7M18 18l7 7"/>
+  </g>
+  <g fill="#fff" stroke="#17323a" stroke-width="1.6">
+    <circle cx="6.5" cy="7.5" r="3"/>
+    <circle cx="25.5" cy="6.5" r="3"/>
+    <circle cx="25.5" cy="25.5" r="3"/>
+  </g>
+  <circle cx="16" cy="16" r="5.5" fill="#0878ff" stroke="#005fc7" stroke-width="1.6"/>
+  <circle cx="14.5" cy="14.5" r="1.2" fill="#fff" opacity=".72"/>
+</svg>
