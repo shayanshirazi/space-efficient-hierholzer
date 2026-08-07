@@ -279,7 +279,7 @@ function createTourStages(graphAnalysis) {
 
     const batchEdges = [...batch.carryIn, ...batch.freshEdges];
     const preparedEdgeStates = createEdgeStateMap(graphAnalysis, "is-muted");
-    setEdgeStateForEdges(preparedEdgeStates, batchEdges, {
+    setEdgeStateForEdges(preparedEdgeStates, batch.releasedEdges, {
       className: batchEdgeClass(batch.batchIndex),
     });
     stages.push({
@@ -290,7 +290,7 @@ function createTourStages(graphAnalysis) {
       canvasTitle: `Prepare circuits for ranks ${range}`,
       edgeStates: preparedEdgeStates,
       activeNodes: new Set(batchEdges.flatMap((edge) => [edge.u, edge.v])),
-      description: `Every edge in batch ${batchIndex + 1} has the same colour.`,
+      description: `The coloured edges are released in batch ${batchIndex + 1}; the gray carry forest remains for the next batch.`,
       memory: [
         vertices,
         skeletonMemory,
