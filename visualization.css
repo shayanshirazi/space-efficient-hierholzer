@@ -134,6 +134,10 @@ html[data-embed="true"] .graph-canvas {
   min-height: 0;
 }
 
+html[data-embed="true"] .graph-pane {
+  height: 100%;
+}
+
 html[data-embed="true"] .canvas-meta {
   min-height: 64px;
 }
