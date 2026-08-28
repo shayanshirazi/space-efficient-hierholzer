@@ -55,3 +55,17 @@ Open <http://localhost:4173>, or run its regression suite with:
 ```sh
 npm test
 ```
+
+### Embedding the visualization
+
+Append `?embed=1` to render only the interactive lab. Embed mode fills the
+iframe viewport, removes page-level scrolling, and keeps the visualization at
+native browser resolution.
+
+```html
+<iframe
+  src="https://shayanshirazi.github.io/space-efficient-hierholzer/?embed=1"
+  title="Interactive Space-Efficient Hierholzer visualization"
+  scrolling="no"
+></iframe>
+```

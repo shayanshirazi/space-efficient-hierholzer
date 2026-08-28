@@ -8,9 +8,14 @@
       content="An interactive visual companion to Space-Efficient Hierholzer for Undirected Graphs."
     >
     <title>Hierholzer</title>
+    <script>
+      if (new URLSearchParams(window.location.search).get("embed") === "1") {
+        document.documentElement.dataset.embed = "true";
+      }
+    </script>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="visualization.css?v=20260806-2200">
-    <link rel="stylesheet" href="styles.css?v=20260806-2200">
+    <link rel="stylesheet" href="visualization.css?v=20260828-1135">
+    <link rel="stylesheet" href="styles.css?v=20260828-1135">
   </head>
   <body>
     <a class="skip-link" href="#visual-lab">Skip to the visual lab</a>
