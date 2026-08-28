@@ -101,6 +101,47 @@ input[type="range"]:focus-visible {
   min-height: 620px;
 }
 
+html[data-embed="true"] .lab-grid {
+  height: 100%;
+  min-height: 0;
+}
+
+html[data-embed="true"] .stage-rail {
+  padding: 14px 12px;
+  scrollbar-width: none;
+}
+
+html[data-embed="true"] .stage-rail::-webkit-scrollbar {
+  display: none;
+}
+
+html[data-embed="true"] .rail-heading {
+  margin-bottom: 10px;
+}
+
+html[data-embed="true"] .stage-group-title {
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+html[data-embed="true"] .stage-button {
+  padding-block: 7px;
+}
+
+html[data-embed="true"] .canvas-card,
+html[data-embed="true"] .graph-canvas-wrap,
+html[data-embed="true"] .graph-canvas {
+  min-height: 0;
+}
+
+html[data-embed="true"] .canvas-meta {
+  min-height: 64px;
+}
+
+html[data-embed="true"] .control-panel {
+  padding: 18px;
+}
+
 .stage-rail {
   min-height: 0;
   padding: 24px 17px;

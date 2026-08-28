@@ -63,6 +63,39 @@ main {
   display: block;
 }
 
+html[data-embed="true"] {
+  height: 100%;
+  overflow: hidden;
+}
+
+html[data-embed="true"] body {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+html[data-embed="true"] .skip-link,
+html[data-embed="true"] .site-header {
+  display: none;
+}
+
+html[data-embed="true"] main,
+html[data-embed="true"] .visual-section,
+html[data-embed="true"] .lab {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+}
+
+html[data-embed="true"] .lab {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 button,
 select,
 textarea,
@@ -651,6 +684,24 @@ dialog form {
     align-items: start;
     flex-direction: column;
     gap: 3px;
+  }
+}
+
+@media (max-width: 840px) {
+  html[data-embed="true"] .lab-grid {
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    height: 100%;
+  }
+
+  html[data-embed="true"] .stage-rail,
+  html[data-embed="true"] .control-panel {
+    display: none;
+  }
+
+  html[data-embed="true"] .canvas-column,
+  html[data-embed="true"] .canvas-card {
+    height: 100%;
   }
 }
 
